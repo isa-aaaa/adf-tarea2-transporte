@@ -60,6 +60,9 @@
 				},
 				{
 					"name": "union2"
+				},
+				{
+					"name": "union3"
 				}
 			],
 			"scriptLines": [
@@ -148,7 +151,8 @@
 				"     skipDuplicateMapOutputs: true) ~> select3",
 				"select1, sql union(byName: true)~> union1",
 				"union1, select2 union(byName: true)~> union2",
-				"union2 sink(allowSchemaDrift: true,",
+				"union2, select3 union(byName: true)~> union3",
+				"union3 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          AnioFuente as string,",
