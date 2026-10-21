@@ -19,6 +19,9 @@
 			"transformations": [
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -38,7 +41,16 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source1",
-				"source1 derive() ~> derivedColumn1"
+				"source1 derive(NombreParada = trim(upper(NombreParada)),",
+				"          Zona = trim(upper(Zona)),",
+				"          Estado = trim(upper(Estado)),",
+				"          ParadaHistoricaId = trim(ParadaHistoricaId),",
+				"          CodigoPublicado = trim(CodigoPublicado),",
+				"          VigenciaDesde = toDate(VigenciaDesde, 'yyyy-MM-dd'),",
+				"          VigenciaHasta = toDate(VigenciaHasta, 'yyyy-MM-dd')) ~> derivedColumn1",
+				"derivedColumn1 derive(Latitud = toFloat(trim(Latitud)),",
+				"          Longitud = toFloat(trim(Longitud)),",
+				"          AnioFuente = toInteger(AnioFuente)) ~> derivedColumn2"
 			]
 		}
 	}
