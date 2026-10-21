@@ -46,11 +46,11 @@
 				"          Estado = trim(upper(Estado)),",
 				"          ParadaHistoricaId = trim(ParadaHistoricaId),",
 				"          CodigoPublicado = trim(CodigoPublicado),",
-				"          VigenciaDesde = toDate(VigenciaDesde, 'yyyy-MM-dd'),",
-				"          VigenciaHasta = toDate(VigenciaHasta, 'yyyy-MM-dd')) ~> derivedColumn1",
+				"          VigenciaDesde = toDate(trim(VigenciaDesde), 'yyyy-MM-dd'),",
+				"          VigenciaHasta = toDate(trim(VigenciaHasta), 'yyyy-MM-dd')) ~> derivedColumn1",
 				"derivedColumn1 derive(Latitud = toFloat(trim(Latitud)),",
 				"          Longitud = toFloat(trim(Longitud)),",
-				"          AnioFuente = toInteger(AnioFuente)) ~> derivedColumn2"
+				"          AnioFuente = toInteger(trim(AnioFuente))) ~> derivedColumn2"
 			]
 		}
 	}
