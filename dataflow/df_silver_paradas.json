@@ -15,13 +15,24 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dw_silver_paradas_sql",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "derivedColumn1"
 				},
 				{
 					"name": "derivedColumn2"
+				},
+				{
+					"name": "derivedColumn3"
 				}
 			],
 			"scriptLines": [
@@ -45,12 +56,34 @@
 				"          Zona = trim(upper(Zona)),",
 				"          Estado = trim(upper(Estado)),",
 				"          ParadaHistoricaId = trim(ParadaHistoricaId),",
-				"          CodigoPublicado = trim(CodigoPublicado),",
-				"          VigenciaDesde = toDate(trim(VigenciaDesde), 'yyyy-MM-dd'),",
-				"          VigenciaHasta = toDate(trim(VigenciaHasta), 'yyyy-MM-dd')) ~> derivedColumn1",
+				"          CodigoPublicado = trim(CodigoPublicado)) ~> derivedColumn1",
 				"derivedColumn1 derive(Latitud = toFloat(trim(Latitud)),",
 				"          Longitud = toFloat(trim(Longitud)),",
-				"          AnioFuente = toInteger(trim(AnioFuente))) ~> derivedColumn2"
+				"          AnioFuente = toInteger(trim(AnioFuente))) ~> derivedColumn2",
+				"derivedColumn2 derive(VigenciaDesde = iif(instr(VigenciaDesde, '/' ) > 0, toDate(VigenciaDesde, 'dd/MM/yyyy'), toDate(VigenciaDesde, 'yyyy-MM-dd')),",
+				"          VigenciaHasta = iif(instr(VigenciaHasta, '/' ) > 0, toDate(VigenciaHasta, 'dd/MM/yyyy'), toDate(VigenciaHasta, 'yyyy-MM-dd'))) ~> derivedColumn3",
+				"derivedColumn3 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          AnioFuente as integer,",
+				"          ParadaHistoricaId as string,",
+				"          CodigoPublicado as string,",
+				"          NombreParada as string,",
+				"          Zona as string,",
+				"          Latitud as decimal(9,6),",
+				"          Longitud as decimal(9,6),",
+				"          VigenciaDesde as date,",
+				"          VigenciaHasta as date,",
+				"          Estado as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}

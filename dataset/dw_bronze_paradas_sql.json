@@ -51,10 +51,6 @@
 				"name": "Estado",
 				"type": "varchar"
 			}
-		],
-		"typeProperties": {
-			"schema": "bronze",
-			"table": "Paradas"
-		}
+		]
 	}
 }
