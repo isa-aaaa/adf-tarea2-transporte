@@ -82,7 +82,18 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          ParadaHistoricaId,",
+				"          CodigoPublicado,",
+				"          NombreParada,",
+				"          Zona,",
+				"          Latitud,",
+				"          Longitud,",
+				"          VigenciaDesde,",
+				"          VigenciaHasta,",
+				"          Estado",
+				"     )) ~> sink1"
 			]
 		}
 	}
