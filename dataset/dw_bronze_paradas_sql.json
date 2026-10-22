@@ -2,7 +2,7 @@
 	"name": "dw_bronze_paradas_sql",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "sql_erp_transporte",
+			"referenceName": "sql_dw_transporte",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -53,8 +53,8 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "dbo",
-			"table": "ParadasAzure"
+			"schema": "bronze",
+			"table": "Paradas"
 		}
 	}
 }
