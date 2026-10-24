@@ -18,7 +18,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "dw_bronze_viajes_sql",
+						"referenceName": "dw_silver_viajes_sql",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -63,16 +63,16 @@
 				"derivedColumn2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          AnioFuente as string,",
+				"          AnioFuente as integer,",
 				"          ViajeId as string,",
 				"          RutaHistoricaId as string,",
 				"          VehiculoId as string,",
-				"          FechaServicio as string,",
-				"          HoraProgramada as string,",
-				"          HoraSalida as string,",
-				"          HoraLlegada as string,",
-				"          ValidacionesTarjeta as string,",
-				"          KmRecorridos as string,",
+				"          FechaServicio as date,",
+				"          HoraProgramada as timestamp,",
+				"          HoraSalida as timestamp,",
+				"          HoraLlegada as timestamp,",
+				"          ValidacionesTarjeta as integer,",
+				"          KmRecorridos as decimal(8,1),",
 				"          EstadoViaje as string",
 				"     ),",
 				"     deletable:false,",
