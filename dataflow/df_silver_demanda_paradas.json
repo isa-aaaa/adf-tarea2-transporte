@@ -52,7 +52,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source1",
-				"source1 derive(RutaHistoricaId = trim(upper(RutaHistoricaId)),",
+				"source1 derive(RutaHistoricaId = replace(trim(upper(RutaHistoricaId)), ' ', ''),",
 				"          ParadaHistoricaId = trim(upper(ParadaHistoricaId)),",
 				"          Franja = trim(Franja),",
 				"          Metodo = trim(upper(Metodo))) ~> derivedColumn1",
