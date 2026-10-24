@@ -2,7 +2,7 @@
 	"name": "dw_bronze_rutas_sql",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "sql_dw_transporte",
+			"referenceName": "sql_erp_transporte",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -49,8 +49,8 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "bronze",
-			"table": "Rutas"
+			"schema": "dbo",
+			"table": "RutasAzure"
 		}
 	}
 }
